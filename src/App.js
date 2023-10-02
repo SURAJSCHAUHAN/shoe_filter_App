@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+
+import productlist from './db/data';
+import Home from "./pages/Home";
 
 function App() {
+
+  const [productData,setProductData]=useState(productlist);
+  const filterItem=(recommend)=>{
+    if(recommend==="All"){
+      setProductData(productlist);
+    }else{
+        const updateList= productlist.filter((curntElem)=>{
+          return curntElem.company===recommend;
+        });
+        setProductData(updateList);
+    }
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+     <Home/>
+    </>
   );
 }
 
-export default App;
+export default App;                       
